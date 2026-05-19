@@ -1,232 +1,129 @@
-# 🛡️ Fraud Detection MLOps System (SQL + Python + MLflow)
+# 🛡️ Fraud Detection System (MLOps Project)
 
-## 📌 Overview
+## What this project is about
 
-This project is an end-to-end **fraud detection system** designed to identify phishing and scam messages (SMS, WhatsApp, Email) such as fake traffic fine notices and banking impersonation attempts.
+This project is about detecting scam and phishing messages like fake traffic fines, bank alerts, or WhatsApp/SMS fraud attempts.
 
-It demonstrates a full **MLOps pipeline** including:
-
-* SQL-based data storage
-* Python NLP feature engineering
-* Machine Learning model training
-* Experiment tracking with MLflow
-* API deployment with FastAPI
-* Visualization & monitoring
+It was built to show how data and machine learning can help identify suspicious messages before people fall victim to scams.
 
 ---
 
-## 🎯 Problem Statement
+## The problem
 
-Fraudsters use social engineering techniques to trick users into:
+Scammers are using very simple but effective tricks:
 
-* Clicking malicious links
-* Sharing banking credentials
-* Approving unauthorized transactions
+* Fake urgent messages (“pay immediately or account will be blocked”)
+* Malicious links
+* Pretending to be banks or government agencies
 
-This system detects fraudulent messages based on:
-
-* Language patterns
-* URL presence
-* Urgency indicators
-* Sender behavior
+The goal here is to build a system that can automatically detect these patterns.
 
 ---
 
-## 🏗️ Architecture
+## How it works
 
-```
-SQL Database → Python ETL → Feature Engineering → ML Model
-        ↓
-   MLflow Tracking
-        ↓
-   FastAPI Deployment
-        ↓
- Monitoring & Visualization
-```
+The system follows a simple pipeline:
+
+SQL database → Python (Jupyter) → Feature engineering → Machine learning model → Prediction API
 
 ---
 
-## 📊 Dataset Structure
+## What I used
 
-Stored in SQL table `messages`:
-
-| Column       | Description               |
-| ------------ | ------------------------- |
-| message_id   | Unique ID                 |
-| sender       | Message sender            |
-| channel      | SMS / WhatsApp / Email    |
-| message_text | Full message content      |
-| url_count    | Number of URLs in message |
-| received_at  | Timestamp                 |
-| label        | 0 = Legit, 1 = Fraud      |
+* Python
+* SQL (PostgreSQL / SQLite)
+* Pandas & NumPy
+* Scikit-learn
+* NLP (TF-IDF)
+* MLflow (for tracking experiments)
+* FastAPI (for deployment)
+* Jupyter Notebook
 
 ---
 
-## ⚙️ Tech Stack
+## How I built it
 
-* 🐍 Python
-* 🗄️ SQL (PostgreSQL / SQLite)
-* 📊 Pandas, NumPy
-* 🤖 Scikit-learn
-* 🧠 NLP (TF-IDF)
-* 📦 MLflow
-* 🚀 FastAPI
-* 🐳 Docker
-* 📈 Matplotlib / Seaborn
-* 📓 Jupyter Notebook
+First, I stored all messages in a SQL database.
 
----
+Then I pulled the data into Python and cleaned it.
 
-## 🔧 Feature Engineering
-
-Key features used:
+After that, I created features like:
 
 * Message length
-* Urgency keywords (urgent, blocked, final notice)
-* URL presence
-* Fraud keyword detection (AARTO, fine, traffic)
-* Sender risk scoring
+* Presence of urgency words (urgent, blocked, final notice)
+* Whether the message contains a link
+* Fraud-related keywords (AARTO, fine, traffic)
+
+I then trained a machine learning model to classify messages as:
+
+* Legitimate (0)
+* Fraudulent (1)
 
 ---
 
-## 🧠 Model Training
+## Model training
 
-Models tested:
+I tested a few models and started with Logistic Regression.
 
-* Logistic Regression (baseline)
-* Random Forest (improved accuracy)
-
-Evaluation metrics:
+I evaluated it using:
 
 * Accuracy
-* Precision / Recall
-* Confusion Matrix
-* ROC-AUC
-
----
-
-## 🚀 How to Run the Project
-
-### 1. Clone Repository
-
-```bash
-git clone https://github.com/your-username/fraud-detection-mlops.git
-cd fraud-detection-mlops
-```
-
----
-
-### 2. Install Dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
----
-
-### 3. Run SQL Database
-
-```sql
-CREATE DATABASE fraud_detection;
-```
-
----
-
-### 4. Start Jupyter Notebook
-
-```bash
-jupyter notebook
-```
-
-Run:
-
-* `01_data_exploration.ipynb`
-* `02_feature_engineering.ipynb`
-* `03_model_training.ipynb`
-
----
-
-### 5. Train Model
-
-```python
-python src/train.py
-```
-
----
-
-### 6. Run API (FastAPI)
-
-```bash
-uvicorn api.app:app --reload
-```
-
----
-
-### 7. Test Prediction
-
-```bash
-POST /predict
-{
-  "message": "Urgent: pay traffic fine immediately via link"
-}
-```
-
----
-
-## 📈 Model Performance
-
-| Metric    | Score                           |
-| --------- | ------------------------------- |
-| Accuracy  | ~92%                            |
-| Precision | High (fraud detection priority) |
-| Recall    | Optimized for fraud catch rate  |
-
----
-
-## 📊 Visualizations
-
-* Fraud vs Legit distribution
-* Channel-based fraud analysis
-* Time-based fraud trends
-* Keyword impact analysis
+* Precision
+* Recall
 * Confusion matrix
-* ROC curve
+
+The goal was not just accuracy, but making sure fraud cases are detected properly.
 
 ---
 
-## 🧪 MLOps Features
+## What makes this project MLOps
 
-* MLflow experiment tracking
-* Model versioning
-* Reproducible pipeline
-* API deployment
-* Docker containerization (optional extension)
+This is not just a model — it’s a full pipeline:
 
----
-
-## 🔐 Business Impact
-
-* Detects phishing scams early
-* Reduces banking fraud risk
-* Supports real-time monitoring
-* Improves customer safety in digital banking
+* Data stored in SQL
+* Feature engineering in Python
+* Model tracking with MLflow
+* API for real-time predictions
+* Structured for deployment using Docker (optional)
 
 ---
 
-## 📌 Future Improvements
+## Example prediction
 
-* Real-time streaming (Kafka)
-* Model drift detection (Evidently AI)
-* Azure/AWS deployment
-* CI/CD pipeline (GitHub Actions)
-* Fraud alert dashboard (Power BI)
+Input:
+
+> “Urgent: pay your traffic fine immediately or your license will be suspended”
+
+Output:
+
+> FRAUD
 
 ---
 
-## 👨‍💻 Author
+## What I learned
 
-**Khangwelo Maphaha**
-Data Engineer | ML & MLOps Enthusiast
-SQL • Python • Azure • AWS • Power BI
+* Fraud patterns are actually very predictable in data
+* Simple features like urgency words and links are very powerful
+* The biggest challenge is keeping the system updated as scammers change tactics
+* MLOps is what turns a model into a real-world system
 
+---
 
+## Future improvements
+
+If I take this further, I would add:
+
+* Real-time message streaming
+* Model drift detection
+* Cloud deployment (Azure/AWS)
+* Dashboard for monitoring fraud trends
+
+---
+
+## Author
+
+Built by Khangwelo Maphaha
+Focused on Data Engineering, MLOps, and Analytics
+
+* Or design a **diagram that makes recruiters instantly impressed**
+* Or help you write a **CV bullet that matches this project perfectly**
