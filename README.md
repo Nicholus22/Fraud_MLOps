@@ -1,7 +1,3 @@
-Here’s a **professional GitHub README** you can use for your **Fraud Detection MLOps Project (SQL + Python + Jupyter)**. It’s structured like real industry projects and is recruiter-ready.
-
----
-
 # 🛡️ Fraud Detection MLOps System (SQL + Python + MLflow)
 
 ## 📌 Overview
