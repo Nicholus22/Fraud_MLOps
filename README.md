@@ -125,5 +125,3 @@ If I take this further, I would add:
 Built by Khangwelo Maphaha
 Focused on Data Engineering, MLOps, and Analytics
 
-* Or design a **diagram that makes recruiters instantly impressed**
-* Or help you write a **CV bullet that matches this project perfectly**
